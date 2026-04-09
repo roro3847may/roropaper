@@ -180,11 +180,14 @@ function renderArticles() {
 
       // 순수 텍스트 추출 (HTML 태그 제거)
       const plainText = stripHtml(post.preview || '');
+      const escaped = escapeHtml(plainText);
+      const firstChar = escaped.charAt(0);
+      const rest = escaped.slice(1);
 
       el.innerHTML = `
         <div class="preview-title">${escapeHtml(post.title || '')}</div>
         <div class="preview-body">
-          <span class="preview-text">${escapeHtml(plainText)}</span>
+          <div class="preview-text"><span class="preview-dropcap">${firstChar}</span>${rest}</div>
         </div>
       `;
 

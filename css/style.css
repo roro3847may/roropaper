@@ -286,6 +286,15 @@ body {
   color: #444;
 }
 
+.preview-dropcap {
+  font-size: 2em;
+  line-height: 1;
+  float: left;
+  margin-right: 3px;
+  font-weight: 700;
+  color: #222;
+}
+
 .preview-title {
   font-size: 13px;
   font-weight: 600;
