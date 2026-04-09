@@ -547,14 +547,15 @@ def delete_post(filename):
 def deploy():
     """Git add, commit, push"""
     try:
-        subprocess.run(['git', 'add', '-A'], cwd=BASE_DIR, check=True,
-                       capture_output=True, text=True)
+        run_opts = dict(cwd=BASE_DIR, check=True, capture_output=True, encoding='utf-8', errors='replace')
+        subprocess.run(['git', 'add', '-A'], **run_opts)
         subprocess.run(
             ['git', 'commit', '-m', f'글 업데이트 - {datetime.datetime.now().strftime("%Y-%m-%d %H:%M:%S")}'],
-            cwd=BASE_DIR, check=True, capture_output=True, text=True
+            **run_opts
         )
-        subprocess.run(['git', 'push'], cwd=BASE_DIR, check=True,
-                       capture_output=True, text=True)
+        # 원격에 새 커밋이 있을 수 있으므로 pull 후 push
+        subprocess.run(['git', 'pull', '--rebase'], **run_opts)
+        subprocess.run(['git', 'push'], **run_opts)
         print('[배포] Git push 완료')
     except subprocess.CalledProcessError as e:
         print(f'[배포 경고] {e.stderr or e.stdout or str(e)}')

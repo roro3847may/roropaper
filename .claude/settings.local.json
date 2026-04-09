@@ -2,7 +2,10 @@
   "permissions": {
     "allow": [
       "Bash(git init:*)",
-      "Bash(mkdir -p posts css js)"
+      "Bash(mkdir -p posts css js)",
+      "Bash(git pull:*)",
+      "Bash(git stash:*)",
+      "Bash(git push:*)"
     ]
   }
 }
