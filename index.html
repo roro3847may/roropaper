@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>로로 紙</title>
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+  <!-- 메뉴바 -->
+  <header id="menubar">
+    <div class="menu-left">
+      <button id="date-btn" title="날짜 선택">📅</button>
+      <span id="current-date"></span>
+    </div>
+    <div class="menu-center">
+      <a href="#" id="title-link" class="site-title">로로 紙</a>
+    </div>
+    <div class="menu-right">
+      <span id="email-copy" title="클릭하여 복사">roroyh47@gmail.com</span>
+    </div>
+  </header>
+
+  <!-- 달력 팝업 -->
+  <div id="calendar-overlay" class="hidden">
+    <div id="calendar-popup">
+      <div class="cal-header">
+        <button id="cal-prev">&lt;</button>
+        <span id="cal-title"></span>
+        <button id="cal-next">&gt;</button>
+      </div>
+      <div class="cal-weekdays">
+        <span>일</span><span>월</span><span>화</span><span>수</span><span>목</span><span>금</span><span>토</span>
+      </div>
+      <div id="cal-days"></div>
+    </div>
+  </div>
+
+  <!-- 복사 알림 -->
+  <div id="copy-toast" class="hidden">이메일이 복사되었습니다!</div>
+
+  <!-- 메인 콘텐츠: 3분할 -->
+  <main id="main-content">
+    <div class="column" id="col-knowledge">
+      <h2 class="column-title">지식 한 조각</h2>
+      <div class="article-list" data-category="knowledge"></div>
+    </div>
+    <div class="divider"></div>
+    <div class="column" id="col-news">
+      <h2 class="column-title">요즘 소식</h2>
+      <div class="article-list" data-category="news"></div>
+    </div>
+    <div class="divider"></div>
+    <div class="column" id="col-daily">
+      <h2 class="column-title">연호의 하루</h2>
+      <div class="article-list" data-category="daily"></div>
+    </div>
+  </main>
+
+  <!-- 글 상세보기 -->
+  <article id="article-view" class="hidden">
+    <button id="back-btn">&larr; 목록으로</button>
+    <div id="article-content"></div>
+  </article>
+
+  <script src="js/app.js"></script>
+</body>
+</html>

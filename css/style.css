@@ -1,0 +1,392 @@
+/* 기본 리셋 */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: 'Noto Sans KR', 'Malgun Gothic', sans-serif;
+  background: #fafaf7;
+  color: #222;
+  min-height: 100vh;
+}
+
+/* ========== 메뉴바 ========== */
+#menubar {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 100;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  height: 52px;
+  padding: 0 24px;
+  background: #fff;
+  border-bottom: 1px solid #ddd;
+}
+
+.menu-left {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+#date-btn {
+  background: none;
+  border: 1px solid #ccc;
+  border-radius: 6px;
+  padding: 4px 10px;
+  font-size: 18px;
+  cursor: pointer;
+  transition: background 0.15s;
+}
+
+#date-btn:hover {
+  background: #f0f0f0;
+}
+
+#current-date {
+  font-size: 14px;
+  color: #555;
+  font-weight: 500;
+}
+
+.menu-center {
+  position: absolute;
+  left: 50%;
+  transform: translateX(-50%);
+}
+
+.site-title {
+  font-size: 22px;
+  font-weight: 700;
+  color: #222;
+  text-decoration: none;
+  letter-spacing: 2px;
+}
+
+.site-title:hover {
+  color: #555;
+}
+
+.menu-right {
+  display: flex;
+  align-items: center;
+}
+
+#email-copy {
+  font-size: 13px;
+  color: #777;
+  cursor: pointer;
+  padding: 4px 8px;
+  border-radius: 4px;
+  transition: background 0.15s;
+}
+
+#email-copy:hover {
+  background: #f0f0f0;
+  color: #333;
+}
+
+/* ========== 달력 팝업 ========== */
+#calendar-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(0, 0, 0, 0.3);
+  z-index: 200;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+#calendar-popup {
+  background: #fff;
+  border-radius: 12px;
+  padding: 20px;
+  width: 320px;
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.15);
+}
+
+.cal-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 14px;
+}
+
+.cal-header button {
+  background: none;
+  border: none;
+  font-size: 18px;
+  cursor: pointer;
+  padding: 4px 10px;
+  border-radius: 4px;
+}
+
+.cal-header button:hover {
+  background: #eee;
+}
+
+#cal-title {
+  font-weight: 600;
+  font-size: 16px;
+}
+
+.cal-weekdays {
+  display: grid;
+  grid-template-columns: repeat(7, 1fr);
+  text-align: center;
+  font-size: 12px;
+  color: #999;
+  margin-bottom: 6px;
+}
+
+#cal-days {
+  display: grid;
+  grid-template-columns: repeat(7, 1fr);
+  gap: 2px;
+}
+
+.cal-day {
+  text-align: center;
+  padding: 8px 0;
+  border-radius: 6px;
+  cursor: pointer;
+  font-size: 14px;
+  transition: background 0.12s;
+}
+
+.cal-day:hover {
+  background: #eef2ff;
+}
+
+.cal-day.today {
+  font-weight: 700;
+  color: #2563eb;
+}
+
+.cal-day.selected {
+  background: #2563eb;
+  color: #fff;
+}
+
+.cal-day.selected:hover {
+  background: #1d4ed8;
+}
+
+.cal-day.has-posts {
+  position: relative;
+}
+
+.cal-day.has-posts::after {
+  content: '';
+  position: absolute;
+  bottom: 3px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 5px;
+  height: 5px;
+  border-radius: 50%;
+  background: #f97316;
+}
+
+.cal-day.selected.has-posts::after {
+  background: #fff;
+}
+
+.cal-day.empty {
+  cursor: default;
+}
+
+.cal-day.other-month {
+  color: #ccc;
+}
+
+/* ========== 복사 토스트 ========== */
+#copy-toast {
+  position: fixed;
+  bottom: 30px;
+  left: 50%;
+  transform: translateX(-50%);
+  background: #333;
+  color: #fff;
+  padding: 10px 24px;
+  border-radius: 8px;
+  font-size: 14px;
+  z-index: 300;
+  opacity: 0;
+  transition: opacity 0.3s;
+}
+
+#copy-toast.show {
+  opacity: 1;
+}
+
+/* ========== 메인 콘텐츠 3분할 ========== */
+#main-content {
+  display: flex;
+  margin-top: 52px;
+  min-height: calc(100vh - 52px);
+}
+
+.column {
+  flex: 1;
+  padding: 24px 20px;
+}
+
+.divider {
+  width: 1px;
+  background: #ddd;
+  flex-shrink: 0;
+}
+
+.column-title {
+  font-size: 18px;
+  font-weight: 700;
+  margin-bottom: 20px;
+  padding-bottom: 10px;
+  border-bottom: 2px solid #222;
+}
+
+/* ========== 글 미리보기 ========== */
+.article-preview {
+  cursor: pointer;
+  padding: 12px 0;
+  border-bottom: 1px solid #eee;
+  transition: background 0.12s;
+  overflow: hidden;
+}
+
+.article-preview:hover {
+  background: #f8f8f5;
+}
+
+.preview-body {
+  display: flex;
+  flex-wrap: wrap;
+  line-height: 1.6;
+  font-size: 15px;
+  max-height: calc(1.6em * 3);
+  overflow: hidden;
+}
+
+.preview-dropcap {
+  float: left;
+  font-size: 2.6em;
+  line-height: 1.2;
+  font-weight: 700;
+  margin-right: 4px;
+  margin-top: 2px;
+  color: #333;
+}
+
+.preview-text {
+  overflow: hidden;
+  display: -webkit-box;
+  -webkit-line-clamp: 3;
+  -webkit-box-orient: vertical;
+  line-height: 1.6;
+  font-size: 15px;
+  color: #444;
+}
+
+.preview-title {
+  font-size: 13px;
+  font-weight: 600;
+  color: #888;
+  margin-bottom: 4px;
+}
+
+/* ========== 글 상세보기 ========== */
+#article-view {
+  margin-top: 52px;
+  padding: 32px;
+  max-width: 760px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+#back-btn {
+  background: none;
+  border: 1px solid #ccc;
+  border-radius: 6px;
+  padding: 6px 14px;
+  font-size: 14px;
+  cursor: pointer;
+  margin-bottom: 24px;
+  transition: background 0.15s;
+}
+
+#back-btn:hover {
+  background: #f0f0f0;
+}
+
+#article-content {
+  line-height: 1.8;
+  font-size: 16px;
+}
+
+#article-content h1,
+#article-content h2,
+#article-content h3 {
+  margin: 20px 0 10px;
+}
+
+/* ========== 유틸리티 ========== */
+.hidden {
+  display: none !important;
+}
+
+/* ========== 글 내용 없을 때 ========== */
+.no-articles {
+  color: #aaa;
+  font-size: 14px;
+  text-align: center;
+  padding: 40px 0;
+}
+
+/* ========== 반응형 ========== */
+@media (max-width: 768px) {
+  #main-content {
+    flex-direction: column;
+  }
+
+  .divider {
+    width: auto;
+    height: 1px;
+  }
+
+  .menu-center {
+    position: static;
+    transform: none;
+  }
+
+  #menubar {
+    flex-wrap: wrap;
+    height: auto;
+    padding: 8px 12px;
+    gap: 4px;
+  }
+
+  .menu-left,
+  .menu-right {
+    order: 1;
+  }
+
+  .menu-center {
+    order: 0;
+    width: 100%;
+    text-align: center;
+    margin-bottom: 4px;
+  }
+
+  #article-view {
+    padding: 20px 16px;
+  }
+}
